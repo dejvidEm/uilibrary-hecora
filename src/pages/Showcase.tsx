@@ -10,6 +10,8 @@ import {
   Heading,
   Subheading,
   Sidebar,
+  Tile,
+  Weather,
 } from '../components'
 import {
   GridIcon,
@@ -23,7 +25,9 @@ import {
   ChatIcon,
   ChecklistIcon,
 } from '../components/SidebarIcons/SidebarIcons'
+import { ClockIcon, PeopleIcon } from '../components/moj_pobyt/TileIcons/TileIcons'
 import CheckinModal from './CheckinModal'
+import MojPobyt from './moj_pobyt/MojPobyt'
 import {
   LoginModal,
   RegisterModal,
@@ -35,6 +39,7 @@ import {
 } from './AuthModals'
 
 function Showcase() {
+  const [showMojPobyt, setShowMojPobyt] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false)
@@ -43,6 +48,10 @@ function Showcase() {
   const [isSetNewPasswordModalOpen, setIsSetNewPasswordModalOpen] = useState(false)
   const [isAuthCodeModalOpen, setIsAuthCodeModalOpen] = useState(false)
   const [isProblemModalOpen, setIsProblemModalOpen] = useState(false)
+
+  if (showMojPobyt) {
+    return <MojPobyt />
+  }
 
   return (
     <>
@@ -599,6 +608,21 @@ function Showcase() {
             </div>
           </section>
 
+          {/* Moj Pobyt Screen Section */}
+          <section className="mb-12">
+            <div className="bg-white rounded-lg shadow-sm p-6">
+              <div className="mb-4">
+                <Button
+                  onClick={() => setShowMojPobyt(true)}
+                  variant="outline"
+                  color="#CC6431"
+                >
+                  Zobraziť Moj Pobyt Screen
+                </Button>
+              </div>
+            </div>
+          </section>
+
           {/* Sidebar Section */}
           <section className="mb-12">
             <div className="bg-white rounded-lg shadow-sm p-6">
@@ -701,6 +725,176 @@ function Showcase() {
                       console.log('Help clicked')
                     }}
                   />
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Tile Component Section */}
+          <section className="mb-12">
+            <div className="bg-white rounded-lg shadow-sm p-6">
+              <div className="space-y-6">
+                <div>
+                  <h3 className="text-lg font-semibold mb-4">Tile Component - All Layout Variations</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {/* Layout 2: Icon with heading */}
+                    <div>
+                      <p className="text-xs text-gray-500 mb-2">Type 1: Icon + Heading</p>
+                      <Tile
+                        icon={<PeopleIcon />}
+                        heading="Počet hostí"
+                      />
+                    </div>
+
+                    {/* Layout 3: Icon with heading and subheading */}
+                    <div>
+                      <p className="text-xs text-gray-500 mb-2">Type 2: Icon + Heading + Subheading</p>
+                      <Tile
+                        icon={<PeopleIcon />}
+                        heading="Počet hostí"
+                        subheading="2 dospělí"
+                      />
+                    </div>
+
+                    {/* Layout 4: Icon with heading, subheading and button */}
+                    <div>
+                      <p className="text-xs text-gray-500 mb-2">Type 3: Icon + Heading + Subheading + Button</p>
+                      <Tile
+                        icon={<ClockIcon />}
+                        heading="Check-out"
+                        subheading="18. apríla 2025, do 11:00"
+                        buttonText="Chcem neskorší odchod"
+                        onButtonClick={() => console.log('Late check-out requested')}
+                        buttonVariant="outline"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Additional examples */}
+                <div>
+                  <h3 className="text-lg font-semibold mb-4">Additional Examples</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <Tile
+                      icon={<ClockIcon />}
+                      heading="Check-in"
+                      subheading="15. apríla 2025, od 14:00"
+                    />
+                    <Tile
+                      icon={<PeopleIcon />}
+                      heading="Počet hostí"
+                      subheading="2 dospělí, 1 dieťa"
+                      buttonText="Zmeniť"
+                      onButtonClick={() => console.log('Change guests')}
+                      buttonVariant="outline"
+                    />
+                    <Tile
+                      icon={<ClockIcon />}
+                      heading="Check-out"
+                      subheading="18. apríla 2025, do 11:00"
+                      buttonText="Chcem neskorší odchod"
+                      onButtonClick={() => console.log('Late check-out')}
+                      buttonVariant="default"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Weather Component Section */}
+          <section className="mb-12">
+            <div className="bg-white rounded-lg shadow-sm p-6">
+              <div className="space-y-8">
+                {/* Desktop Version */}
+                <div>
+                  <h3 className="text-lg font-semibold mb-4">Weather Component - Desktop (max 96px)</h3>
+                  <div className="hidden md:flex flex-wrap gap-4 justify-center">
+                    <Weather
+                      label="Dnes"
+                      weatherType="thunderstorm"
+                      temperature="12/10°C"
+                    />
+                    <Weather
+                      label="Zajtra"
+                      weatherType="sunny"
+                      temperature="18/12°C"
+                    />
+                    <Weather
+                      label="Pozajtra"
+                      weatherType="rainy"
+                      temperature="15/11°C"
+                    />
+                    <Weather
+                      label="Pondelok"
+                      weatherType="cloudy"
+                      temperature="14/9°C"
+                    />
+                    <Weather
+                      label="Utorok"
+                      weatherType="partly-cloudy"
+                      temperature="16/11°C"
+                    />
+                    <Weather
+                      label="Streda"
+                      weatherType="snowy"
+                      temperature="2/-2°C"
+                    />
+                  </div>
+                  <p className="md:hidden text-sm text-gray-500 text-center">Resize to desktop view to see desktop version</p>
+                </div>
+
+                {/* Mobile Version */}
+                <div>
+                  <h3 className="text-lg font-semibold mb-4">Weather Component - Mobile (max 76px)</h3>
+                  <div className="flex md:hidden flex-wrap gap-4 justify-center">
+                    <Weather
+                      label="Dnes"
+                      weatherType="thunderstorm"
+                      temperature="12/10°C"
+                    />
+                    <Weather
+                      label="Zajtra"
+                      weatherType="sunny"
+                      temperature="18/12°C"
+                    />
+                    <Weather
+                      label="Pozajtra"
+                      weatherType="rainy"
+                      temperature="15/11°C"
+                    />
+                    <Weather
+                      label="Pondelok"
+                      weatherType="cloudy"
+                      temperature="14/9°C"
+                    />
+                    <Weather
+                      label="Utorok"
+                      weatherType="partly-cloudy"
+                      temperature="16/11°C"
+                    />
+                    <Weather
+                      label="Streda"
+                      weatherType="snowy"
+                      temperature="2/-2°C"
+                    />
+                  </div>
+                  <p className="hidden md:block text-sm text-gray-500 text-center">Resize to mobile view to see mobile version</p>
+                </div>
+
+                {/* All Weather Types - Responsive Grid */}
+                <div>
+                  <h3 className="text-lg font-semibold mb-4">All Weather Types</h3>
+                  <div className="flex flex-wrap gap-4 justify-center">
+                    <Weather weatherType="sunny" temperature="25/18°C" />
+                    <Weather weatherType="partly-cloudy" temperature="20/15°C" />
+                    <Weather weatherType="cloudy" temperature="18/12°C" />
+                    <Weather weatherType="rainy" temperature="16/10°C" />
+                    <Weather weatherType="thunderstorm" temperature="14/8°C" />
+                    <Weather weatherType="snowy" temperature="2/-2°C" />
+                    <Weather weatherType="foggy" temperature="10/8°C" />
+                    <Weather weatherType="windy" temperature="15/10°C" />
+                  </div>
                 </div>
               </div>
             </div>

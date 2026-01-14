@@ -51,3 +51,12 @@ export type { SidebarNavigationProps } from './SidebarNavigation/SidebarNavigati
 
 export { default as Sidebar } from './Sidebar/Sidebar'
 export type { SidebarProps, SidebarMenuItemData } from './Sidebar/Sidebar'
+
+export { default as SidebarMobileHeader } from './SidebarMobileHeader/SidebarMobileHeader'
+export type { SidebarMobileHeaderProps } from './SidebarMobileHeader/SidebarMobileHeader'
+
+export { default as Tile } from './moj_pobyt/Tile/Tile'
+export type { TileProps } from './moj_pobyt/Tile/Tile'
+
+export { default as Weather } from './moj_pobyt/Weather/Weather'
+export type { WeatherProps, WeatherType } from './moj_pobyt/Weather/Weather'
